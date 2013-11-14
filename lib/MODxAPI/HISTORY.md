@@ -1,3 +1,6 @@
+## 1.0.5 (14.11.2013)
+* Добавлен абстрактный класс autoTable и на его основе созданы классы modChunk, modSnippet, modTemplate, modCategories, modModule, modPlugin
+
 ## 1.0.4 (06.11.2013)
 * Исправлено дублирование значение ТВ параметров в таблице site_tmplvar_contentvalues (Issue #17)
 * Исправлен метод отчистки кэша из-за которого все сыпалось в Fatal Error (Issue #18)
