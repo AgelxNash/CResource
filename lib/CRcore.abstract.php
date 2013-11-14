@@ -32,6 +32,13 @@ abstract class CRcore{
         return (array)$array;
     }
 
+    protected function loadModClass($class){
+        if(!class_exists($class) && file_exists(dirname(__FILE__)."/MODxAPI/".$class.".php")){
+            require_once(dirname(__FILE__)."/MODxAPI/".$class.".php");
+        }
+        return class_exists($class);
+    }
+
     //$this->getOptions(array('DocLister','api','2'), 'none')
     public function getOptions($name,$default=null, $from = null){
         $out = null;

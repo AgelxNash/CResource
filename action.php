@@ -53,7 +53,10 @@ switch($mode){
     }
     case 'list':{
         $out = '';
-        $display = isset($_REQUEST['rows']) ? (int)$_REQUEST['rows'] : 10;
+        $default = $CRdata->getOptions('DocLister',array());
+
+        //$display = isset($_REQUEST['rows']) ? (int)$_REQUEST['rows'] : 10;
+        $display = isset($default['display']) ? (int)$default['display'] : 10;
         $offset = isset($_REQUEST['page']) ? (int)$_REQUEST['page'] : 1;
         $offset = $display*($offset-1);
 
@@ -70,12 +73,12 @@ switch($mode){
         if(isset($_REQUEST['order']) && in_array(strtoupper($_REQUEST['order']), array("ASC","DESC"))){
             $param['sortDir'] = $_REQUEST['order'];
         }
-        $param = array_merge($param, $CRdata->getOptions('DocLister',array()));
+        $param = array_merge($param, $default);
 
         $param['idField'] = $CRdata->getOptions('idField','id');
         $tmp = $CRdata->getOptions('parentField',null);
 
-        if(isset($tmp,$_REQUEST['parent']) && (int)$_REQUEST['parent']>=0){
+        if(isset($_REQUEST['parent']) && !empty($tmp) && (int)$_REQUEST['parent']>=0){
             $param['addWhereList'] = $tmp." = '".(int)$_REQUEST['parent']."'";
         }
         $out=$modx->runSnippet("DocLister",$param);

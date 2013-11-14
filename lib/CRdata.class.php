@@ -15,12 +15,7 @@ class CRdata extends CRcore{
         }
     }
 
-    private function loadModClass($class){
-        if(!class_exists($class) && file_exists(dirname(__FILE__)."/MODxAPI/".$class.".class.php")){
-            require_once("MODxAPI/".$class.".class.php");
-        }
-        return class_exists($class);
-    }
+
     public function renameData($data){
         $rename = $this->getOptions('renameField', null);
         if(is_array($rename)){
@@ -47,7 +42,7 @@ class CRdata extends CRcore{
     public function create(){
         if(!empty($_POST)){
             $data = $this->renameData($_POST);
-            $this->_modClass->create($data)->save();
+            $this->_modClass->create($data)->save(true, true);
         }else{
             $out = false;
         }
@@ -67,7 +62,7 @@ class CRdata extends CRcore{
         $out = false;
         if(!empty($_POST) && isset($_POST[$this->_PKfield])){
            $data = $this->renameData($_POST);
-           if($_POST[$this->_PKfield] == $this->_modClass->edit($_POST[$this->_PKfield])->fromArray($data)->save()){
+           if($_POST[$this->_PKfield] == $this->_modClass->edit($_POST[$this->_PKfield])->fromArray($data)->save(true, true)){
                 $out = $_POST[$this->_PKfield];
             }
         }

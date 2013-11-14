@@ -72,7 +72,33 @@ class CRGrid extends CRcore{
         return $out;
     }
 
-
+    public function checkRules(){
+        $DocID = (isset($_REQUEST['id'])) ? (int)$_REQUEST['id'] : 0;
+        $rules = $this->getOptions("rules", array());
+        $flag = empty($rules);
+        if(!$flag && $DocID && $this->loadModClass("modResource")){
+            $DOC = new modResource($this->_modx);
+            $data = $DOC->edit($DocID)->toArray();
+            $flag = true;
+            foreach($rules as $item => $value){
+                switch($item){
+                    case 'id':{
+                        if($DOC->getID() != $value){
+                            $flag = false;
+                        }
+                        break;
+                    }
+                    default:{
+                        if(!isset($data[$item]) || $data[$item]!=$value){
+                            $flag = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        return $flag;
+    }
     private function gridData($data){
         $out = '';
         $data['idField'] = $this->getOptions('idField','id');

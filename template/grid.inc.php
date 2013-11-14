@@ -3,16 +3,34 @@
 <link rel="stylesheet" type="text/css" href="<?=$dir;?>easyui/demo/demo.css">
 <script type="text/javascript" src="<?=$dir;?>easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?=$dir;?>easyui/plugins/jquery.edatagrid.js"></script>
+<script type="text/javascript">
+    <?=$jqname;?>.extend(<?=$jqname;?>.fn.datebox.defaults,{
+        formatter:function(date){
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            return y + '-' + (m<10?('0'+m):m) + '-' + (d<10?('0'+d):d);
+        },
+        parser:function(s){
+            if (!s) return new Date();
+            var ss = s.split('-');
+            var d = parseInt(ss[2],10);
+            var m = parseInt(ss[1],10);
+            var y = parseInt(ss[0],10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                return new Date(y,m-1,d);
+            } else {
+                return new Date();
+            }
+        }
+    });
+</script>
 <style>
     .datagrid-cell
     {
         color:#000;
     }
 </style>
-@TODO: Проверка на соответствие шаблона<br />
-@TODO: Поиск документа по данным LIKE<br />
-@TODO: Плагином вырезать кнопки управления документом и подменить их на обычную сохранить с продолжением редактирования<br />
-
 <div id="tt" class="easyui-tabs" style="height:auto;">
     <div title="Document" style="padding:10px" data-options="closable:false" >
         <table class="easyui-datagrid" id="dataGrid" title="Basic DataGrid"
