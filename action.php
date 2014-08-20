@@ -79,7 +79,7 @@ switch($mode){
         $tmp = $CRdata->getOptions('parentField',null);
 
         if(isset($_REQUEST['parent']) && !empty($tmp) && (int)$_REQUEST['parent']>=0){
-            $param['addWhereList'] = $tmp." = '".(int)$_REQUEST['parent']."'";
+            $param['parents'] = (int)$_REQUEST['parent'];
         }
         $out=$modx->runSnippet("DocLister",$param);
         break;

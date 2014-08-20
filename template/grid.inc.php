@@ -24,6 +24,10 @@
             }
         }
     });
+	
+	<?=$jqname;?>.extend(<?=$jqname;?>.fn.pagination.defaults,{
+        pageSize: '<?=$display;?>'
+    });
 </script>
 <style>
     .datagrid-cell

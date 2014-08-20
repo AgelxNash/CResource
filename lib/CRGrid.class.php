@@ -102,6 +102,7 @@ class CRGrid extends CRcore{
     private function gridData($data){
         $out = '';
         $data['idField'] = $this->getOptions('idField','id');
+		$data['display'] = $this->getOptions('display', 10, $this->getOptions('DocLister', array()));
         $grid = $this->getOptions('grid',array());
         foreach($grid as $item=>$value){
               $name = isset($value['name']) ? $value['name'] : $item;
