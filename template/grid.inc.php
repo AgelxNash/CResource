@@ -4,30 +4,28 @@
 <script type="text/javascript" src="<?=$dir;?>easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<?=$dir;?>easyui/plugins/jquery.edatagrid.js"></script>
 <script type="text/javascript">
-    <?=$jqname;?>.extend(<?=$jqname;?>.fn.datebox.defaults,{
-        formatter:function(date){
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y + '-' + (m<10?('0'+m):m) + '-' + (d<10?('0'+d):d);
-        },
-        parser:function(s){
-            if (!s) return new Date();
-            var ss = s.split('-');
-            var d = parseInt(ss[2],10);
-            var m = parseInt(ss[1],10);
-            var y = parseInt(ss[0],10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-                return new Date(y,m-1,d);
-            } else {
-                return new Date();
+    (function($){
+        $.extend($.fn.datebox.defaults,{
+            formatter:function(date){
+                var y = date.getFullYear();
+                var m = date.getMonth()+1;
+                var d = date.getDate();
+                return y + '-' + (m<10?('0'+m):m) + '-' + (d<10?('0'+d):d);
+            },
+            parser:function(s){
+                if (!s) return new Date();
+                var ss = s.split('-');
+                var d = parseInt(ss[2],10);
+                var m = parseInt(ss[1],10);
+                var y = parseInt(ss[0],10);
+                if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                    return new Date(y,m-1,d);
+                } else {
+                    return new Date();
+                }
             }
-        }
-    });
-	
-	<?=$jqname;?>.extend(<?=$jqname;?>.fn.pagination.defaults,{
-        pageSize: '<?=$display;?>'
-    });
+        });
+    })(jQuery);
 </script>
 <style>
     .datagrid-cell
@@ -38,7 +36,7 @@
 <div id="tt" class="easyui-tabs" style="height:auto;">
     <div title="Document" style="padding:10px" data-options="closable:false" >
         <table class="easyui-datagrid" id="dataGrid" title="Basic DataGrid"
-               data-options="idField:'<?=$idField;?>',toolbar:'#tbar',singleSelect:true,pagination:true">
+               data-options="idField:'<?=$idField;?>',toolbar:'#tbar',singleSelect:true,pagination:true,pageSize:<?=$display;?>">
             <thead>
             <tr>
                 <?=$header;?>
@@ -53,10 +51,10 @@
     <div style="margin-bottom:5px">
         <a href="#" class="easyui-linkbutton" onclick="addBtn()" iconCls="icon-add" plain="true"> Добавить</a>
         <a href="#" class="easyui-linkbutton" onclick="editBtn()" iconCls="icon-edit" plain="true"> Редактировать</a>
-        <a href="#" class="easyui-linkbutton"  iconCls="icon-remove" plain="true" onclick="javascript:<?=$jqname;?>('#dataGrid').edatagrid('destroyRow')"> Удалить</a>
+        <!--<a href="#" class="easyui-linkbutton"  iconCls="icon-remove" plain="true" onclick="javascript:<?/*=$jqname;*/?>('#dataGrid').edatagrid('destroyRow')"> Удалить</a>
         <span style="margin-left:20px";>&nbsp;</span>
         <input class="textsearch" style="width:180px">
-        <a href="#" class="easyui-linkbutton" onclick="findBtn()" iconCls="icon-search">Найти</a>
+        <a href="#" class="easyui-linkbutton" onclick="findBtn()" iconCls="icon-search">Найти</a>-->
     </div>
 </div>
 
