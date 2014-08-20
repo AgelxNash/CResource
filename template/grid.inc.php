@@ -25,6 +25,10 @@
                 }
             }
         });
+
+        $.extend($.fn.pagination.defaults,{
+            pageList:[10,20,30,50,100,200,500,1000]
+        });
     })(jQuery);
 </script>
 <style>
@@ -36,7 +40,7 @@
 <div id="tt" class="easyui-tabs" style="height:auto;">
     <div title="Document" style="padding:10px" data-options="closable:false" >
         <table class="easyui-datagrid" id="dataGrid" title="Basic DataGrid"
-               data-options="idField:'<?=$idField;?>',toolbar:'#tbar',singleSelect:true,pagination:true,pageSize:<?=$display;?>">
+               data-options="idField:'<?=$idField;?>',toolbar:'#tbar',singleSelect:true,pagination:true,pageSize:<?=$display;?>,pageList:[10,20,30,50,100,200,500,1000]">
             <thead>
             <tr>
                 <?=$header;?>
