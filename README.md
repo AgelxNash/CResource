@@ -38,10 +38,9 @@ CResource - плагин позволяющий организовать ред�
 	</td>
 	<td valign="top">
 		<h4>Реквизиты для доната<br /><br /></h4>
-		<br />
+		<br /><br />
 		<strong>WMZ</strong>: Z762708026453<br />
 		<strong>WMR</strong>: R203864025267<br />
-		<strong>ЯД</strong>: 41001299480137<br />
 		<strong>PayPal</strong>: agel_nash@xaker.ru<br />
 	</td>
   </tr>
